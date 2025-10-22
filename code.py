@@ -305,7 +305,7 @@ with right:
             try:
                 gdf_centros = load_points(CENTROS_GEOJSON_PATH)
                 # Colorea por "Tipo Institución" (Privado/Público)
-                field = "Tipo Institución" if "Tipo Institución" in gdf_centros.columns else None
+                field = "Tipo Institucion" if "Tipo Institucion" in gdf_centros.columns else None
                 if field is None:
                     # fallback si el campo viniera con otra variante
                     for cand in ["Tipo_Institucion", "tipo_institucion", "tipo", "Tipo"]:
@@ -313,7 +313,7 @@ with right:
                             field = cand
                             break
                 if field is None:
-                    st.warning("No se encontró el campo 'Tipo Institución' en Centros educativos; se usarán marcadores grises.")
+                    st.warning("No se encontró el campo 'Tipo Institucion' en Centros educativos; se usarán marcadores grises.")
                     field = "__dummy__"
                     gdf_centros[field] = "Centro educativo"
 
