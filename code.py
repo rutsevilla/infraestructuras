@@ -304,11 +304,11 @@ with right:
         if chk_centros:
             try:
                 gdf_centros = load_points(CENTROS_GEOJSON_PATH)
-                # Colorea por "Tipo Institución" (Privado/Público)
+                # Colorea por "Tipo Institucion" (Privado/Público)
                 field = "Tipo Institucion" if "Tipo Institucion" in gdf_centros.columns else None
                 if field is None:
                     # fallback si el campo viniera con otra variante
-                    for cand in ["Tipo_Institucion", "tipo_institucion", "tipo", "Tipo"]:
+                    for cand in ["Tipo Institucion", "tipo_institucion", "tipo", "Tipo"]:
                         if cand in gdf_centros.columns:
                             field = cand
                             break
