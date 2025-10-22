@@ -15,17 +15,17 @@ from streamlit_folium import st_folium
 import branca.colormap as cm
 
 # ================== RUTAS (ajústalas) ==================
-SHP_PATH = "/share/home/ruts/notebooks/costa-rica/geometry/UGED_MGN_2022.shp"  # distritos (CRS en metros)
-CARRETERAS_GEOJSON_PATH = "/share/home/ruts/notebooks/costa-rica/infraestructuras/geojson-proces/carreteras-principales-cr.geojson"
-CENTROS_GEOJSON_PATH = "/share/home/ruts/notebooks/costa-rica/infraestructuras/geojson-proces/centros-educativos-cr.geojson"
-HOSPITALES_GEOJSON_PATH = "/share/home/ruts/notebooks/costa-rica/infraestructuras/geojson-proces/centros-salud-cr.geojson"
-POLICIA_GEOJSON_PATH   = "/share/home/ruts/notebooks/costa-rica/infraestructuras/geojson-proces/cuerpos-seguridad-cr.geojson"
-INDICES_JSON_PATH = "/share/home/ruts/notebooks/costa-rica/infraestructuras/dades-proces/indices-desarrollo-cr.json"
-DELITOS_JSON_PATH   = "/share/home/ruts/notebooks/costa-rica/infraestructuras/dades-proces/delitos-cr.json"
-EDU_EXTRA_JSON_PATH = "/share/home/ruts/notebooks/costa-rica/infraestructuras/dades-proces/educacion-cr.json"
-BUS_GEOJSON_PATH       = "/share/home/ruts/notebooks/costa-rica/infraestructuras/geojson-proces/bus-paradas-cr.geojson"
-EMPRESAS_GEOJSON_PATH = "/share/home/ruts/notebooks/costa-rica/infraestructuras/geojson-proces/empresas-oficios-cr.geojson"
-TRANSITO_JSON_PATH   = "/share/home/ruts/notebooks/costa-rica/infraestructuras/dades-proces/accidentes-trafico-cr.json"
+SHP_PATH = ".data/UGED_MGN_2022_simplified.shp"  # distritos (CRS en metros)
+CARRETERAS_GEOJSON_PATH = "./data/geojson-proces/carreteras-principales-cr.geojson"
+CENTROS_GEOJSON_PATH = "./data/geojson-proces/centros-educativos-cr.geojson"
+HOSPITALES_GEOJSON_PATH = "./data/geojson-proces/centros-salud-cr.geojson"
+POLICIA_GEOJSON_PATH   = "./data/geojson-proces/cuerpos-seguridad-cr.geojson"
+INDICES_JSON_PATH = "./data/dades-proces/indices-desarrollo-cr.json"
+DELITOS_JSON_PATH   = "./data/dades-proces/delitos-cr.json"
+EDU_EXTRA_JSON_PATH = "./data/dades-proces/educacion-cr.json"
+BUS_GEOJSON_PATH       = "./data/geojson-proces/bus-paradas-cr.geojson"
+EMPRESAS_GEOJSON_PATH = "./data/geojson-proces/empresas-oficios-cr.geojson"
+TRANSITO_JSON_PATH   = "./data/dades-proces/accidentes-trafico-cr.json"
 logo_path = "./static/logos/TDP_Logo_White.svg"
 
 # Clave de unión en el shapefile (código de distrito)
