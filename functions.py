@@ -20,7 +20,6 @@ from rasterio.vrt import WarpedVRT
 from rasterio.enums import Resampling
 from rasterio.transform import Affine
 from PIL import Image
-from matplotlib import cm as mpl_cm
 
 
 # ================== UTILIDADES BÁSICAS ==================
