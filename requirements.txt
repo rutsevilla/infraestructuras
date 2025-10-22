@@ -8,7 +8,6 @@ geopandas
 leaflet
 folium
 streamlit_folium
-json
-typing
+
 
 
