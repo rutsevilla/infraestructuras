@@ -1,0 +1,17 @@
+streamlit
+plotly
+pandas
+numpy
+streamlit-option-menu
+unidecode
+geopandas
+leaflet
+folium
+streamlit_folium
+json
+typing
+braca.colormap
+PIL
+base64
+os
+
