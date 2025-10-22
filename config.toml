@@ -1,0 +1,20 @@
+[server]
+enableStaticServing = true
+
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Regular.woff2"
+style = "normal"
+
+
+[theme]
+base = "dark"
+primaryColor = "#15A1E2"
+backgroundColor = "#175CA1"
+secondaryBackgroundColor = "#133C5A"
+textColor = "#F0F6FA"
+font = "Poppins"
+codeFont="Poppins"
+baseFontSize = 16
+baseFontWeight = 400
