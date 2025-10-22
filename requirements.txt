@@ -10,8 +10,5 @@ folium
 streamlit_folium
 json
 typing
-braca.colormap
-PIL
-base64
-os
+
 
