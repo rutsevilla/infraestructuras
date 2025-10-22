@@ -15,7 +15,7 @@ from streamlit_folium import st_folium
 import branca.colormap as cm
 
 # ================== RUTAS (ajústalas) ==================
-SHP_PATH = ".data/UGED_MGN_2022_simplified.shp"  # distritos (CRS en metros)
+SHP_PATH = "./data/UGED_MGN_2022_simplified.shp"  # distritos (CRS en metros)
 CARRETERAS_GEOJSON_PATH = "./data/geojson-proces/carreteras-principales-cr.geojson"
 CENTROS_GEOJSON_PATH = "./data/geojson-proces/centros-educativos-cr.geojson"
 HOSPITALES_GEOJSON_PATH = "./data/geojson-proces/centros-salud-cr.geojson"
