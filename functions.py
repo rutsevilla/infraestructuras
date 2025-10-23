@@ -14,6 +14,8 @@ import streamlit as st
 import folium
 from folium.plugins import FastMarkerCluster
 from folium.features import GeoJsonTooltip
+from shapely.geometry import LineString, MultiLineString
+
 
 import rasterio
 from rasterio.vrt import WarpedVRT
@@ -299,12 +301,6 @@ def add_point_layer(
     fg.add_to(m)
 
 
-def add_point_cluster(gdf_points: gpd.GeoDataFrame, m: folium.Map, layer_name: str):
-    """Añade puntos agrupados eficientemente (ideal para muchos puntos)."""
-    coords = [(pt.y, pt.x) for pt in gdf_points.geometry if pt and not pt.is_empty]
-    fg = folium.FeatureGroup(name=layer_name, show=True)
-    FastMarkerCluster(coords).add_to(fg)
-    fg.add_to(m)
 
 
 def robust_vmin_vmax(values: List[Optional[float]]) -> tuple[float, float]:
@@ -357,6 +353,7 @@ def load_lines(path: str, simplify_tol_m: float | None = None) -> gpd.GeoDataFra
     gdf = gdf[gdf.geometry.notnull() & ~gdf.geometry.is_empty].copy()
     if not any(t.startswith("Line") for t in gdf.geom_type.unique()):
         raise TypeError(f"Se esperaban líneas. Tipos: {gdf.geom_type.unique()}")
+    st.write('he lleago aqui')
 
     # Arreglo de válidas sólo si hace falta
     if hasattr(gdf.geometry, "is_valid"):
@@ -444,6 +441,37 @@ def add_road_layer(
     ).add_to(fg)
     fg.add_to(m)
 
+
+def add_train_lines_layer(
+    gdf_lines,
+    m: folium.Map,
+    layer_name: str = "Líneas",
+    color: str = "#8000ff",
+    weight: float = 3.0,
+    opacity: float = 0.9,
+):
+    """
+    Añade una capa de líneas (GeoDataFrame) a un mapa Folium con color fijo.
+    Compatible con NumPy >= 2.0.
+    """
+    if gdf_lines.empty:
+        raise ValueError("GeoDataFrame vacío: no hay líneas para mostrar.")
+
+    # Convertimos explícitamente a dict para evitar el bug de NumPy 2.0
+    geojson_data = gdf_lines.to_json()
+
+    fg = folium.FeatureGroup(name=layer_name, show=True)
+    folium.GeoJson(
+        data=geojson_data,
+        style_function=lambda feat: {
+            "color": color,
+            "weight": weight,
+            "opacity": opacity,
+        },
+        name=layer_name,
+    ).add_to(fg)
+
+    fg.add_to(m)
 
 @st.cache_data(show_spinner=True)
 def load_as_points(path: str, polygon_method: str = "representative") -> gpd.GeoDataFrame:
@@ -739,3 +767,5 @@ def load_canton_boundaries_geojson(
     # Exportar a GeoJSON dict (evita volver a leer archivo)
     gj = json.loads(gdf.to_json())
     return gj
+
+
