@@ -353,7 +353,6 @@ def load_lines(path: str, simplify_tol_m: float | None = None) -> gpd.GeoDataFra
     gdf = gdf[gdf.geometry.notnull() & ~gdf.geometry.is_empty].copy()
     if not any(t.startswith("Line") for t in gdf.geom_type.unique()):
         raise TypeError(f"Se esperaban líneas. Tipos: {gdf.geom_type.unique()}")
-    st.write('he lleago aqui')
 
     # Arreglo de válidas sólo si hace falta
     if hasattr(gdf.geometry, "is_valid"):
