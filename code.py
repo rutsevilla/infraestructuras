@@ -26,6 +26,9 @@ EDU_EXTRA_JSON_PATH = "./data/dades-proces/educacion-cr.json"
 BUS_GEOJSON_PATH       = "./data/geojson-proces/bus-paradas-cr.geojson"
 EMPRESAS_GEOJSON_PATH = "./data/geojson-proces/empresas-oficios-cr.geojson"
 TRANSITO_JSON_PATH   = "./data/dades-proces/accidentes-trafico-cr.json"
+RUTAS_TREN_GEOJSON_PATH = "./data/geojson-proces/tren-rutas-cr.geojson"
+PARADAS_TREN_GEOJSON_PATH = "./data/geojson-proces/tren-paradas-cr.geojson"
+
 logo_path = "./static/logos/TDP_Logo_White.svg"
 
 # Clave de unión en el shapefile (código de distrito)
@@ -136,9 +139,11 @@ with left:
         chk_centros    = st.checkbox("Centros educativos", value=False)
         chk_hospital   = st.checkbox("Centros de Salud", value=False)
         chk_policia    = st.checkbox("Estaciones de policía", value=False)
-        chk_carreteras = st.checkbox("Carreteras", value=False)
-        chk_bus        = st.checkbox("Paradas de bus", value=False)
         chk_empresas   = st.checkbox("Empresas y oficios", value=False)
+        chk_carreteras = st.checkbox("Carreteras", value=False)
+        chk_rutas_tren = st.checkbox("Rutas de tren", value=False)
+        chk_bus        = st.checkbox("Paradas de bus", value=False)
+        chk_paradas_tren = st.checkbox("Paradas de tren", value=False)
 
     with st.container(border=True):
         st.markdown("<p style='font-size: 2.5vh; font-weight: 300; color: #fff;'>Selección de variable</p>", unsafe_allow_html=True)
@@ -304,7 +309,7 @@ with right:
         if chk_centros:
             try:
                 gdf_centros = load_points(CENTROS_GEOJSON_PATH)
-                # Colorea por "Tipo Institucion" (Privado/Público)
+                # Colorea por "Tipo Institución" (Privado/Público)
                 field = "Tipo Institucion" if "Tipo Institucion" in gdf_centros.columns else None
                 if field is None:
                     # fallback si el campo viniera con otra variante
@@ -391,7 +396,6 @@ with right:
             except Exception as e:
                 st.warning(f"No se pudo cargar 'Carreteras': {e}")
         
-        # ================== Paradas de bus ==================
         # ================== Paradas de bus (puntos sin cluster) ==================
         if chk_bus:
             try:
@@ -460,6 +464,33 @@ with right:
 
             except Exception as e:
                 st.warning(f"No se pudo cargar 'Empresas y oficios': {e}")
+
+        if chk_rutas_tren:
+            try:
+                gdf_tren = load_lines(RUTAS_TREN_GEOJSON_PATH)
+                add_train_lines_layer(
+                    gdf_tren,
+                    m,
+                    layer_name="Rutas de tren",
+                )
+            except Exception as e:
+                st.warning(f"No se pudo cargar 'Rutas de tren': {e}")
+        
+        if chk_paradas_tren:
+            try:
+                gdf_paradas_tren = load_points(PARADAS_TREN_GEOJSON_PATH)
+                add_point_layer(
+                    gdf_paradas_tren,
+                    m,
+                    layer_name="Paradas de tren",
+                    radius=4,
+                    color="#4B0082",
+                    fill_color="#9370DB",
+                    fill_opacity=0.9,
+                    tooltip_col=next((c for c in ["Nombre", "NOMBRE", "name"] if c in gdf_paradas_tren.columns), None)
+                )
+            except Exception as e:
+                st.warning(f"No se pudo cargar 'Paradas de tren': {e}")
 
         # Leyenda solo si hay índice
         if colormap is not None:
